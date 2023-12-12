@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto;
+option go_package="../proto";
+
+enum ErrCode {
+    OK = 0;
+    ERR = -1;
+
+    // 1000 - 1999 通用错误
+    UpParam = 1000; // 上行参数错误
+
+    // 2000 - 2999 用户错误
+    AccountRegister_NameInvalid = 2000; // 用户名不合法
+    AccountRegister_PwdInvalid = 2001; // 密码不合法
+    AccountRegister_NameExist = 2002; // 用户名已存在
+}

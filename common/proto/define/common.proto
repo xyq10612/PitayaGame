@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "../proto";
+
+import "err.proto";
+
+message CommonResponse {
+  ErrCode err = 1;
+}
+
+message ErrorMessage {
+  ErrCode err = 1;
+  string msg = 2;
+}

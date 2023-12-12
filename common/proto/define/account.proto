@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "../proto";
+
+import "err.proto";
+
+message RegisterRequest {
+  string account = 1;
+  string password = 2;
+}
