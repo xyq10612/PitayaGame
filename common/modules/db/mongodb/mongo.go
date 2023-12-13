@@ -2,6 +2,7 @@ package mongodb
 
 import (
 	"context"
+	"errors"
 	"github.com/topfreegames/pitaya/v2/modules"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -21,6 +22,7 @@ func NewMongoStorage(config MongoConfig) *MongoStorage {
 }
 
 func (m *MongoStorage) Init() error {
+	m.Connect()
 	return nil
 }
 
@@ -55,4 +57,19 @@ func (m *MongoStorage) Close() {
 
 func (m *MongoStorage) GetCollection(dbName, collection string) *mongo.Collection {
 	return m.Database(dbName).Collection(collection)
+}
+
+func (m *MongoStorage) InsertOne(c Collection) error {
+	_, err := m.GetCollection(c.GetDBName(), c.GetCollectionName()).InsertOne(context.TODO(), c)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MongoStorage) Exist(dbName, collection string, filter interface{}) bool {
+	opt := &options.FindOneOptions{Projection: filter}
+	r := m.GetCollection(dbName, collection).FindOne(context.TODO(), filter, opt)
+	return !errors.Is(mongo.ErrNoDocuments, r.Err())
 }

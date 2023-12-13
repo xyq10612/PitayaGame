@@ -40,7 +40,6 @@ func TestRegister(t *testing.T) {
 	}
 	s := mongodb.NewMongoStorage(*config)
 	s.Init()
-	s.Connect()
 	err := registerAccount(s, "test", "pwdtest", "test001uid")
 	assert.NoError(t, err)
 	account, err := queryAccount(s, "test")
