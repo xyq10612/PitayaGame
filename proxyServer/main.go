@@ -11,6 +11,7 @@ import (
 	"github.com/topfreegames/pitaya/v2/acceptor"
 	"github.com/topfreegames/pitaya/v2/component"
 	"github.com/topfreegames/pitaya/v2/config"
+	"proxyServer/router"
 	"proxyServer/service"
 	"strings"
 )
@@ -36,6 +37,8 @@ func main() {
 
 	registerServices()
 	registerModules()
+
+	app.AddRoute(constants.LobbyServer, router.LobbyRouterFunc)
 
 	app.Start()
 }
