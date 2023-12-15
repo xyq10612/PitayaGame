@@ -9,3 +9,13 @@ message RegisterRequest {
   string account = 1;
   string password = 2;
 }
+
+message LoginRequest {
+  string account = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  ErrCode ret = 1;
+  string uid = 2;
+}

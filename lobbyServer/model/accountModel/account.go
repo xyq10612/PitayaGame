@@ -2,9 +2,9 @@ package accountModel
 
 import (
 	"common/constants"
+	"common/helper"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"lobbyServer/helper"
 )
 
 type AccountModel struct {

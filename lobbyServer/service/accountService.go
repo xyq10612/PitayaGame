@@ -68,3 +68,20 @@ func (s *AccountService) Register(ctx context.Context, req *proto.RegisterReques
 
 	return &proto.CommonResponse{Err: proto.ErrCode_OK}, nil
 }
+
+func (s *AccountService) Login(ctx context.Context, req *proto.LoginRequest) (*proto.LoginResponse, error) {
+	logger := pitaya.GetDefaultLoggerFromCtx(ctx)
+
+	logger.Infof("login...%v", req)
+
+	uid := req.Account + s.app.GetServerID()[:6]
+	return &proto.LoginResponse{Ret: proto.ErrCode_OK, Uid: uid}, nil
+}
+
+func (s *AccountService) MockLogic(ctx context.Context) (*proto.CommonResponse, error) {
+	logger := pitaya.GetDefaultLoggerFromCtx(ctx)
+
+	logger.Infof("mock logic !")
+
+	return &proto.CommonResponse{Err: proto.ErrCode_OK}, nil
+}

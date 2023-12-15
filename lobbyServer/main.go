@@ -15,7 +15,7 @@ import (
 var app pitaya.Pitaya
 
 func main() {
-	serverType := "lobby"
+	serverType := constants.LobbyServer
 
 	logrus.SetLevel(logrus.DebugLevel)
 

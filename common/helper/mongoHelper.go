@@ -7,19 +7,19 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-var db *mongodb.MongoStorage
+var m *mongodb.MongoStorage
 
 func GetMongo() *mongodb.MongoStorage {
-	if db == nil {
-		m, err := pitaya.DefaultApp.GetModule(constants.MongoDBModule)
+	if m == nil {
+		module, err := pitaya.DefaultApp.GetModule(constants.MongoDBModule)
 		if err != nil {
 			panic(err)
 		}
 
-		db = m.(*mongodb.MongoStorage)
+		m = module.(*mongodb.MongoStorage)
 	}
 
-	return db
+	return m
 }
 
 func GetGameDB() *mongo.Database {
