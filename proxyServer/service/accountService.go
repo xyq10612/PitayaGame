@@ -84,12 +84,12 @@ func (s *AccountService) Login(ctx context.Context, req *proto.LoginRequest) (*p
 		return rsp, nil
 	}
 
-	logger = logger.WithField("userId", rsp.Uid).WithField("lobby", lobbyId)
+	//logger = logger.WithField("userId", rsp.Uid).WithField("lobby", lobbyId)
 
-	// 5. 更新redis缓存, 记录登录的lobby
+	// 4. 更新redis缓存, 记录登录的lobby
 	loginModel.Save(req.Account, lobbyId)
 
-	// 6. 绑定session-lobby, session-uid
+	// 5. 绑定session-lobby, session-uid
 	session.Bind(ctx, rsp.Uid)
 	session.Set(constants.SessionLobbyIdKey, lobbyId)
 

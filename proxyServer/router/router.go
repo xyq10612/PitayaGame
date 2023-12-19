@@ -47,6 +47,9 @@ func LobbyRouterFunc(
 	if session == nil || !session.HasKey(constants.SessionLobbyIdKey) {
 		return nil, errors.New("not find binding lobby in session")
 	}
+	if session.UID() == "" {
+		return nil, errors.New("please login")
+	}
 
 	lobbyId := session.Get(constants.SessionLobbyIdKey).(string)
 	s, ok := servers[lobbyId]
